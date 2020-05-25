@@ -28,3 +28,6 @@ class Money():
     @property
     def currency(self):
         return self._currency
+
+    def plus(self, addend):
+        return Money(self.amount + addend.amount, self._currency)
