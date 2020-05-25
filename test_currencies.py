@@ -50,5 +50,13 @@ class CurrencyTest(TestCase):
         result = bank.reduce(Money.franc(2), 'USD')
         self.assertEqual(Money.dollar(1), result) 
 
+    def testMixedAddition(self):
+        fivedollar = Money.dollar(5)
+        tenfranc = Money.franc(10)
+        bank = Bank()
+        bank.addRate('CHF', 'USD', 2)
+        result = bank.reduce(fivedollar.plus(tenfranc), 'USD')
+        self.assertEqual(Money.dollar(10), result)
+
 if __name__ == '__main__':
     unittest.main()

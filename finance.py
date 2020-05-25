@@ -33,7 +33,6 @@ class Money():
         return Sum(self, addend)
     
     def reduce(self, bank, to):
-        bank = Bank()
         rate = bank.rate(self._currency, to)
         return Money(self.amount/rate, to)
 
@@ -41,11 +40,11 @@ class Bank():
     def __init__(self):
         self._rates = {}
 
-    def addRate(self, source, to, rate):
-        self._rates[(source, to)] = rate
-
     def reduce(self, source, to):
         return source.reduce(self, to)
+
+    def addRate(self, source, to, rate):
+        self._rates[(source, to)] = rate
 
     def rate(self, source, to):
         if source == to:
@@ -58,5 +57,5 @@ class Sum():
         self.addend = addend
     
     def reduce(self, bank, to):
-        amount = self.augend.amount + self.addend.amount
+        amount = self.augend.reduce(bank, to).amount + self.addend.reduce(bank,to).amount
         return Money(amount, to)
