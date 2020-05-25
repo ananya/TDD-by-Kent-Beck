@@ -1,6 +1,6 @@
 import unittest
 from unittest import TestCase
-from finance import Money, Bank
+from finance import Money, Bank, Sum
 
 class CurrencyTest(TestCase):
     def testMultiplication(self):
@@ -20,10 +20,23 @@ class CurrencyTest(TestCase):
     def testDifferentClassEquality(self):
         self.assertEqual(Money(10,"CHF"), Money.franc(10))
 
+    def testPlusReturnsSum(self):
+        five = Money.dollar(5)
+        sum = five.plus(five)
+        self.assertEqual(five, sum.augend)
+        self.assertEqual(five, sum.addend)
+    
+    def testReduceSum(self):
+        sum = Sum(Money.dollar(3), Money.dollar(4))
+        bank = Bank()
+        result = bank.reduce(sum, "USD")
+        self.assertEqual(Money.dollar(7), result)
+
     def testSimpleAddition(self):
         five = Money.dollar(5)
         sum = five.plus(five)
-        reduced = Bank.reduce(sum, "USD")
+        bank = Bank()
+        reduced = bank.reduce(sum, "USD")
         self.assertEqual(Money.dollar(10), reduced)
 
 if __name__ == '__main__':

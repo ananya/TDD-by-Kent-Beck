@@ -30,7 +30,7 @@ class Money():
         return self._currency
 
     def plus(self, addend):
-        return Money(self.amount + addend.amount, self._currency)
+        return Sum(self, addend)
     
 
 class Bank():
@@ -38,4 +38,13 @@ class Bank():
         self._reduce = {}
 
     def reduce(self, source, to):
-        return Money.dollar(10)
+        return source.reduce(self, to)
+
+class Sum():
+    def __init__(self, augend, addend):
+        self.augend = augend
+        self.addend = addend
+    
+    def reduce(self, bank, to):
+        amount = self.augend.amount + self.addend.amount
+        return Money(amount, to)
