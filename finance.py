@@ -32,14 +32,14 @@ class Money():
     def plus(self, addend):
         return Sum(self, addend)
     
+    def reduce(self, _, to):
+        return self
 
 class Bank():
     def __init__(self):
         self._reduce = {}
 
     def reduce(self, source, to):
-        if isinstance(source, Money):
-            return source
         return source.reduce(self, to)
 
 class Sum():
@@ -47,6 +47,9 @@ class Sum():
         self.augend = augend
         self.addend = addend
     
-    def reduce(self, bank, to):
+    def reduce(self, source, to):
+        if isinstance(source, Money):
+            return source.reduce(to)
+        sum = source
         amount = self.augend.amount + self.addend.amount
         return Money(amount, to)
