@@ -5,7 +5,7 @@
 
 class Dollar():
     def __init__(self, amount):
-        self.amount = 10
+        self.amount = amount
 
     def times(self, multiplier):
         return self.amount*multiplier
