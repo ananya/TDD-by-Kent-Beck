@@ -9,5 +9,9 @@ class CurrencyTest(TestCase):
         self.assertEqual(10,five.times(2))
         self.assertEqual(15,five.times(3))
 
+    def testEquality(self):
+        self.assertEqual(Dollar(5), Dollar(5))   
+
+
 if __name__ == '__main__':
     unittest.main()
