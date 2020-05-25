@@ -67,6 +67,15 @@ class CurrencyTest(TestCase):
         result = bank.reduce(sum, 'USD')
         self.assertEqual(Money.dollar(15), result)
 
+    def testSumTimes(self):
+        fivedollar = Money.dollar(5)
+        tenfranc = Money.franc(10)
+        bank = Bank()
+        bank.addRate('CHF', 'USD', 2)
+        sum = Sum(fivedollar, tenfranc).times(2)
+        result = bank.reduce(sum, 'USD')
+        self.assertEqual(Money.dollar(20), result)
+
 
 if __name__ == '__main__':
     unittest.main()
