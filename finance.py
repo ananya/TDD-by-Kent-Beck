@@ -10,10 +10,13 @@ class Money():
     def __eq__(self, other):
         return self.amount == other.amount
 
-class Dollar (Money):
-    def times(self, multiplier):
-        return Dollar(self.amount*multiplier)
+    @staticmethod
+    def dollar (amount):
+        return Money(amount)
 
-class Franc(Money):
+    @staticmethod
+    def franc (amount):
+        return Money(amount)
+
     def times(self, multiplier):
-        return Franc(self.amount*multiplier)
+        return Money(self.amount*multiplier)
