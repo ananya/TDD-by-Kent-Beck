@@ -59,3 +59,6 @@ class Sum():
     def reduce(self, bank, to):
         amount = self.augend.reduce(bank, to).amount + self.addend.reduce(bank,to).amount
         return Money(amount, to)
+
+    def plus(self, addend):
+        return Sum(self, addend)
