@@ -4,19 +4,24 @@
 # normal methods called on object(e.g times)
 
 class Money():
-    def __init__(self, amount):
+    def __init__(self, amount, currency):
         self.amount = amount
+        self._currency = currency
     
     def __eq__(self, other):
         return self.amount == other.amount
 
     @staticmethod
     def dollar (amount):
-        return Money(amount)
+        return Money(amount, 'USD')
 
     @staticmethod
     def franc (amount):
-        return Money(amount)
+        return Money(amount, 'CHF')
 
     def times(self, multiplier):
-        return Money(self.amount*multiplier)
+        return Money(self.amount*multiplier, self._currency)
+
+    @property
+    def currency(self):
+        return self._currency
