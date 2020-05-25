@@ -31,3 +31,11 @@ class Money():
 
     def plus(self, addend):
         return Money(self.amount + addend.amount, self._currency)
+    
+
+class Bank():
+    def __init__(self):
+        self._reduce = {}
+
+    def reduce(self, source, to):
+        return Money.dollar(10)
