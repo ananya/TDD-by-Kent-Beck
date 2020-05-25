@@ -11,4 +11,4 @@ class Dollar():
         return self.amount == other.amount
 
     def times(self, multiplier):
-        return self.amount*multiplier
+        return Dollar(self.amount*multiplier)
