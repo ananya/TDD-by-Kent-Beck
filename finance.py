@@ -38,6 +38,8 @@ class Bank():
         self._reduce = {}
 
     def reduce(self, source, to):
+        if isinstance(source, Money):
+            return source
         return source.reduce(self, to)
 
 class Sum():

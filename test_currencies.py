@@ -32,6 +32,12 @@ class CurrencyTest(TestCase):
         result = bank.reduce(sum, "USD")
         self.assertEqual(Money.dollar(7), result)
 
+    def testReduceMoney(self):
+        bank = Bank()
+        result = bank.reduce(Money.dollar(1), "USD")
+        self.assertEqual(Money.dollar(1), result)
+
+
     def testSimpleAddition(self):
         five = Money.dollar(5)
         sum = five.plus(five)
