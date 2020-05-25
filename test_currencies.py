@@ -14,11 +14,11 @@ class CurrencyTest(TestCase):
         self.assertNotEqual(Money.franc(5), Money.dollar(5))   
 
     def testCurrency(self):
-        self.assertEqual("USD", Money.dollar(1).currency)
-        self.assertEqual("CHF", Money.franc(1).currency)
+        self.assertEqual('USD', Money.dollar(1).currency)
+        self.assertEqual('CHF', Money.franc(1).currency)
 
     def testDifferentClassEquality(self):
-        self.assertEqual(Money(10,"CHF"), Money.franc(10))
+        self.assertEqual(Money(10,'CHF'), Money.franc(10))
 
     def testPlusReturnsSum(self):
         five = Money.dollar(5)
@@ -29,25 +29,25 @@ class CurrencyTest(TestCase):
     def testReduceSum(self):
         sum = Sum(Money.dollar(3), Money.dollar(4))
         bank = Bank()
-        result = bank.reduce(sum, "USD")
+        result = bank.reduce(sum, 'USD')
         self.assertEqual(Money.dollar(7), result)
 
     def testReduceMoney(self):
         bank = Bank()
-        result = bank.reduce(Money.dollar(1), "USD")
+        result = bank.reduce(Money.dollar(1), 'USD')
         self.assertEqual(Money.dollar(1), result)
 
     def testSimpleAddition(self):
         five = Money.dollar(5)
         sum = five.plus(five)
         bank = Bank()
-        reduced = bank.reduce(sum, "USD")
+        reduced = bank.reduce(sum, 'USD')
         self.assertEqual(Money.dollar(10), reduced)
 
     def testReduceMoneyDifferentCurrency(self):
         bank = Bank()
-        bank.addRate("CHF", "USD", 2)
-        result = bank.reduce(Money.franc(2), "USD")
+        bank.addRate('CHF', 'USD', 2)
+        result = bank.reduce(Money.franc(2), 'USD')
         self.assertEqual(Money.dollar(1), result) 
 
 if __name__ == '__main__':
