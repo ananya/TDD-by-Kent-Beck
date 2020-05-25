@@ -9,7 +9,10 @@ class Money():
         self._currency = currency
     
     def __eq__(self, other):
-        return self.amount == other.amount
+        return (
+            self.amount == other.amount and
+            self._currency == other.currency
+        )
 
     @staticmethod
     def dollar (amount):
