@@ -76,6 +76,11 @@ class CurrencyTest(TestCase):
         result = bank.reduce(sum, 'USD')
         self.assertEqual(Money.dollar(20), result)
 
+    def testPlusSameCurrencyeturnMoney(self):
+        sum= Money.dollar(1).plus(Money.dollar(1))
+        bank = Bank()
+        reduced = bank.reduce(sum, 'USD')
+        self.assertEqual(isinstance(reduced,Money), True)
 
 if __name__ == '__main__':
     unittest.main()
